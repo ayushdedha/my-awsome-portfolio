@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Download, ExternalLink, Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Menu, X, Download, ExternalLink, Github, Linkedin, Mail, Phone, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -96,13 +96,46 @@ const Portfolio = () => {
     }
   ];
 
+  // Particle system for background
+  useEffect(() => {
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = Math.random() * 4 + 2 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      
+      const particlesContainer = document.querySelector('.particles');
+      if (particlesContainer) {
+        particlesContainer.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 20000);
+      }
+    };
+
+    const interval = setInterval(createParticle, 300);
+    
+    // Create initial particles
+    for (let i = 0; i < 50; i++) {
+      setTimeout(createParticle, i * 100);
+    }
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-lg border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-primary/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold text-gradient">AC</div>
+            <div className="text-2xl font-bold">
+              <span className="text-gradient">AC</span>
+            </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
@@ -110,20 +143,23 @@ const Portfolio = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className={`transition-colors ${
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 ${
                     activeSection === item.id
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "text-primary bg-primary/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
                   }`}
                 >
                   {item.label}
+                  {activeSection === item.id && (
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full"></div>
+                  )}
                 </button>
               ))}
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden"
+              className="md:hidden p-2 rounded-lg glass"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -132,12 +168,12 @@ const Portfolio = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden mt-4 pb-4">
+            <div className="md:hidden mt-4 pb-4 glass rounded-lg p-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="block w-full text-left py-3 px-4 rounded-lg text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors"
                 >
                   {item.label}
                 </button>
@@ -148,42 +184,135 @@ const Portfolio = () => {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent"></div>
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-glow/5"></div>
+          <div className="particles"></div>
+          
+          {/* Geometric shapes */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary-glow/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
         <div className="container mx-auto px-4 py-20 text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-8">
-              <img
-                src={profileImage}
-                alt="Ayush Choudhary"
-                className="w-48 h-48 rounded-full mx-auto object-cover border-4 border-primary/20 hero-float"
-              />
+          <div className="max-w-6xl mx-auto">
+            {/* Profile Section */}
+            <div className="mb-12 hero-slide-up">
+              <div className="relative inline-block">
+                <img
+                  src={profileImage}
+                  alt="Ayush Choudhary"
+                  className="w-56 h-56 md:w-64 md:h-64 rounded-full mx-auto object-cover border-4 border-primary/30 hero-float hero-pulse"
+                />
+                <div className="absolute -bottom-4 -right-4 glass rounded-full p-4">
+                  <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                </div>
+              </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="text-gradient">Ayush Choudhary</span>
-            </h1>
-            <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6">
-              Full Stack Web Developer
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Building modern, scalable, and secure web solutions with a passion for clean code and exceptional user experiences.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                onClick={() => scrollTo("portfolio")}
-                className="bg-gradient-to-r from-primary to-primary-glow hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
-                size="lg"
-              >
-                View Portfolio
-              </Button>
-              <Button
-                onClick={() => scrollTo("contact")}
-                variant="outline"
-                size="lg"
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-              >
-                Get In Touch
-              </Button>
+
+            {/* Main Content */}
+            <div className="space-y-8">
+              <div className="hero-slide-up-delay-1">
+                <h1 className="text-6xl md:text-8xl font-bold mb-4">
+                  <span className="text-gradient">Ayush</span>
+                  <br />
+                  <span className="text-gradient">Choudhary</span>
+                </h1>
+              </div>
+
+              <div className="hero-slide-up-delay-2">
+                <div className="glass rounded-2xl p-6 max-w-2xl mx-auto mb-8">
+                  <h2 className="text-2xl md:text-4xl font-semibold mb-4 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                    Full Stack Web Developer
+                  </h2>
+                  <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                    Crafting digital experiences with modern technologies. 
+                    Specializing in scalable web solutions that bridge creativity and functionality.
+                  </p>
+                </div>
+              </div>
+
+              {/* Stats */}
+              <div className="hero-slide-up-delay-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-12">
+                  <div className="glass rounded-xl p-4">
+                    <div className="text-2xl font-bold text-primary">2+</div>
+                    <div className="text-sm text-muted-foreground">Years Experience</div>
+                  </div>
+                  <div className="glass rounded-xl p-4">
+                    <div className="text-2xl font-bold text-primary">10+</div>
+                    <div className="text-sm text-muted-foreground">Projects Completed</div>
+                  </div>
+                  <div className="glass rounded-xl p-4">
+                    <div className="text-2xl font-bold text-primary">8.19</div>
+                    <div className="text-sm text-muted-foreground">CGPA</div>
+                  </div>
+                  <div className="glass rounded-xl p-4">
+                    <div className="text-2xl font-bold text-primary">100%</div>
+                    <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Location and Availability */}
+              <div className="hero-slide-up-delay-2">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <MapPin className="h-5 w-5 text-primary" />
+                    <span>Noida, India</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    <span>Available for freelance</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="hero-slide-up-delay-3">
+                <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                  <Button
+                    onClick={() => scrollTo("portfolio")}
+                    size="lg"
+                    className="btn-modern bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl"
+                  >
+                    <ExternalLink className="mr-2 h-5 w-5" />
+                    View My Work
+                  </Button>
+                  <Button
+                    onClick={() => scrollTo("contact")}
+                    variant="outline"
+                    size="lg"
+                    className="btn-modern border-2 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl glass"
+                  >
+                    <Mail className="mr-2 h-5 w-5" />
+                    Let's Connect
+                  </Button>
+                </div>
+              </div>
+
+              {/* Social Links */}
+              <div className="hero-slide-up-delay-3">
+                <div className="flex justify-center space-x-6">
+                  <a href="https://github.com/ayush" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
+                    <Github className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </a>
+                  <a href="https://linkedin.com/in/ayush" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
+                    <Linkedin className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </a>
+                  <a href="mailto:ayush@example.com" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
+                    <Mail className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
+                  <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
