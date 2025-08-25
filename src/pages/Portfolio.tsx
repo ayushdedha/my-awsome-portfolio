@@ -1,14 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, Download, ExternalLink, Github, Linkedin, Mail, Phone, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 import profileImage from "@/assets/profile-hero.jpg";
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +42,37 @@ const Portfolio = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    setIsSubmitting(true);
+
+    try {
+      await emailjs.sendForm(
+        'service_hgh6yz4',
+        'template_rodp4jz',
+        formRef.current,
+        'e-DOxvZ0az-4gHjIv'
+      );
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+
+      formRef.current.reset();
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const navItems = [
@@ -533,15 +569,37 @@ const Portfolio = () => {
             </div>
             <Card>
               <CardContent className="p-6">
-                <form className="space-y-4">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="Your Name" />
-                    <Input placeholder="Your Email" type="email" />
+                    <Input 
+                      name="from_name"
+                      placeholder="Your Name" 
+                      required 
+                    />
+                    <Input 
+                      name="from_email"
+                      placeholder="Your Email" 
+                      type="email" 
+                      required 
+                    />
                   </div>
-                  <Input placeholder="Subject" />
-                  <Textarea placeholder="Your Message" rows={5} />
-                  <Button className="w-full bg-gradient-to-r from-primary to-primary-glow">
-                    Send Message
+                  <Input 
+                    name="subject"
+                    placeholder="Subject" 
+                    required 
+                  />
+                  <Textarea 
+                    name="message"
+                    placeholder="Your Message" 
+                    rows={5} 
+                    required 
+                  />
+                  <Button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-primary to-primary-glow"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
