@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from '@emailjs/browser';
-import profileImage from "@/assets/profile-hero.jpg";
+import profileImage from "@/assets/9.jpg";
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -87,9 +87,21 @@ const Portfolio = () => {
 
   const experiences = [
     {
+      title: "Modern Company Website & Branding",
+      company: `<>CodeWeave`,
+      period: "September 2025",
+      description: "Designed and developed a modern, responsive company website for CodeWeave, focusing on clean UI and smooth user experience. Alongside the website, I also created the company’s logo, ensuring consistent branding and a professional identity across digital platforms"
+    },
+    {
+      title: "Real Estate Property Management Website",
+      company: "Property Shell",
+      period: "July 2025 - August 2025",
+      description: "Developed a full-stack real estate platform with an interactive frontend and a secure backend. The website allows users to browse, search, and filter property listings with ease, while providing an efficient backend for managing listings, user data, and transactions."
+    },
+    {
       title: "Software Engineer",
       company: "PinkUnicornAlgorithms",
-      period: "Jan 2025 - July 2025",
+      period: "Jan 2025 - June 2025",
       description: "Developed SaaS platforms and desktop security software (DBS, Parental Control System). Built responsive web portals, designed UI/UX with Figma, delivered client-focused solutions."
     },
     {
@@ -273,7 +285,7 @@ const Portfolio = () => {
               <div className="hero-slide-up-delay-2">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-12">
                   <div className="glass rounded-xl p-4">
-                    <div className="text-2xl font-bold text-primary">2+</div>
+                    <div className="text-2xl font-bold text-primary">1+</div>
                     <div className="text-sm text-muted-foreground">Years Experience</div>
                   </div>
                   <div className="glass rounded-xl p-4">
@@ -331,24 +343,18 @@ const Portfolio = () => {
               {/* Social Links */}
               <div className="hero-slide-up-delay-3">
                 <div className="flex justify-center space-x-6">
-                  <a href="https://github.com/ayush" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
+                  <a href="https://github.com/ayushdedha" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
                     <Github className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
                   </a>
-                  <a href="https://linkedin.com/in/ayush" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
-                    <Linkedin className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
-                  </a>
-                  <a href="mailto:ayush@example.com" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
+                  
+                  <div className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="ayush-choudhary-4698b6259" data-version="v1"><a className="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/ayush-choudhary-4698b6259?trk=profile-badge"><Linkedin className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" /></a></div>
+                  
+                  <a href="mailto:ayushdedha23@gmail.com" className="p-3 glass rounded-xl hover:bg-primary/10 transition-all duration-300 group">
                     <Mail className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
                   </a>
                 </div>
               </div>
 
-              {/* Scroll Indicator */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
-                  <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -361,7 +367,7 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div>
               <p className="text-lg text-muted-foreground mb-6">
-                I'm a passionate Full Stack Web Developer currently pursuing my B.Tech at Amity University Noida (Batch 2021–2025). 
+                I'm a passionate Full Stack Web Developer. 
                 I specialize in building web-based projects with expertise in both frontend and backend technologies.
               </p>
               <p className="text-lg text-muted-foreground mb-8">
@@ -520,14 +526,12 @@ const Portfolio = () => {
                     ))}
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="flex-1">
+                    <Button size="sm" variant="outline" className="flex-1 btn-modern border-2 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground px-8 font-semibold glass">
                       <Github className="mr-2 h-4 w-4" />
                       Code
                     </Button>
-                    <Button size="sm" className="flex-1">
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Live Demo
-                    </Button>
+                    
+                    <Button size="sm" className="btn-modern bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 font-semibold">Live Demo</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -551,19 +555,19 @@ const Portfolio = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span>ayush@example.com</span>
+                  <span>ayushdedha23@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-primary" />
-                  <span>+91 123456789</span>
+                  <span>+91 9311201990</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Linkedin className="h-5 w-5 text-primary" />
-                  <span>linkedin.com/in/ayush-choudhary</span>
+                  <span>www.linkedin.com/in/ayush-choudhary-4698b6259</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Github className="h-5 w-5 text-primary" />
-                  <span>github.com/ayush</span>
+                  <span>https://github.com/ayushdedha</span>
                 </div>
               </div>
             </div>
