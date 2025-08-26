@@ -129,6 +129,7 @@ const Portfolio = () => {
       description: "Cybersecurity system app + web portal to block USB, browser upload, clipboard, printing, etc., ensuring data security for organizations.",
       tech: ["C#", ".NET", "React", "Node.js"],
       video: "/src/assets/dbs1.mp4",
+      image: "/src/assets/dbs.png",
       code: "https://github.com/harshitpanwar1327/Diffrent-Portal"
     },
     {
@@ -136,6 +137,7 @@ const Portfolio = () => {
       description: "Fully functional real-estate platform with backend and admin features.",
       tech: ["React", "Node.js", "MySQL", "Express.js"],
       video: "/src/assets/estate.mp4",
+      image: "/src/assets/real-estate.png",
       code: "https://github.com/harshitpanwar1327/Real-Estate"
     },
     {
@@ -143,7 +145,7 @@ const Portfolio = () => {
       description: "Various websites developed with both frontend and backend implementation.",
       tech: ["React", "JavaScript", "CSS", "Node.js"],
       video: "/src/assets/freelance.mp4",
-      
+      image: "/src/assets/freelancer.png"
     }
   ];
 
@@ -516,14 +518,22 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {projects.map((project, index) => (
               <Card key={index} className="card-hover overflow-hidden">
-                <div className="aspect-video bg-muted"><video 
-                  src={project.video} 
-                  autoPlay
-                  controls 
-                  muted 
-                  loop 
-                  className="w-full h-full object-cover" 
-                /></div>
+                <div className="aspect-video bg-muted">{project.video ? (
+                  <video
+                    src={project.video}
+                    autoPlay
+                    controls
+                    muted
+                    loop
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={project.image || "/fallback.png"} // fallback image
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}</div>
                 <CardContent className="p-6 flex-col">
                   <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">{project.description}</p>
