@@ -128,24 +128,24 @@ const Portfolio = () => {
       title: "Data Block Solution (DBS)",
       description: "Cybersecurity system app + web portal to block USB, browser upload, clipboard, printing, etc., ensuring data security for organizations.",
       tech: ["C#", ".NET", "React", "Node.js"],
-      // video: "/src/assets/dbs1.mp4",
-      image: "/src/assets/dbs.png",
+      video: "/dbs1.mp4",
+      image: "/dbs.png",
       code: "https://github.com/harshitpanwar1327/Diffrent-Portal"
     },
     {
       title: "Real Estate Platform",
       description: "Fully functional real-estate platform with backend and admin features.",
       tech: ["React", "Node.js", "MySQL", "Express.js"],
-      // video: "/src/assets/estate.mp4",
-      image: "/src/assets/real-estate.png",
+      video: "/estate.mp4",
+      image: "/real-estate.png",
       code: "https://github.com/harshitpanwar1327/Real-Estate"
     },
     {
       title: "Freelance Web Projects",
       description: "Various websites developed with both frontend and backend implementation.",
       tech: ["React", "JavaScript", "CSS", "Node.js"],
-      // video: "/src/assets/freelance.mp4",
-      image: "/src/assets/freelancer.png"
+      video: "/freelance.mp4",
+      image: "/freelancer.png"
     }
   ];
 
