@@ -128,19 +128,22 @@ const Portfolio = () => {
       title: "Data Block Solution (DBS)",
       description: "Cybersecurity system app + web portal to block USB, browser upload, clipboard, printing, etc., ensuring data security for organizations.",
       tech: ["C#", ".NET", "React", "Node.js"],
-      image: "/api/placeholder/400/250"
+      video: "/src/assets/dbs.mp4",
+      code: "https://github.com/harshitpanwar1327/Diffrent-Portal"
     },
     {
       title: "Real Estate Platform",
       description: "Fully functional real-estate platform with backend and admin features.",
       tech: ["React", "Node.js", "MySQL", "Express.js"],
-      image: "/api/placeholder/400/250"
+      video: "/src/assets/real-estate.mp4",
+      code: "https://github.com/harshitpanwar1327/Real-Estate"
     },
     {
       title: "Freelance Web Projects",
       description: "Various websites developed with both frontend and backend implementation.",
       tech: ["React", "JavaScript", "CSS", "Node.js"],
-      image: "/api/placeholder/400/250"
+      video: "/src/assets/freelance.mp4",
+      
     }
   ];
 
@@ -374,9 +377,11 @@ const Portfolio = () => {
                 With experience in modern frameworks and technologies, I create scalable, secure, and user-friendly web applications 
                 that solve real-world problems.
               </p>
-              <Button className="bg-gradient-to-r from-primary to-primary-glow">
-                <Download className="mr-2 h-4 w-4" />
-                Download Resume
+              <Button className="btn-modern bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold rounded-xl" asChild>
+                <a href="/resume.pdf" download="Ayush_Choudhary_Resume.pdf">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Resume
+                </a>
               </Button>
             </div>
             <div>
@@ -511,8 +516,15 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {projects.map((project, index) => (
               <Card key={index} className="card-hover overflow-hidden">
-                <div className="aspect-video bg-muted"></div>
-                <CardContent className="p-6">
+                <div className="aspect-video bg-muted"><video 
+                  src={project.video} 
+                  autoPlay
+                  controls 
+                  muted 
+                  loop 
+                  className="w-full h-full object-cover" 
+                /></div>
+                <CardContent className="p-6 flex-col">
                   <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -525,13 +537,11 @@ const Portfolio = () => {
                       </span>
                     ))}
                   </div>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="flex-1 btn-modern border-2 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground px-8 font-semibold glass">
+                  <div className="flex">
+                    <Button size="sm" variant="outline" className="flex-1 btn-modern border-2 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground px-8 font-semibold glass" onClick={() => project.code && window.open(project.code, "_blank")} disabled={!project.code}>
                       <Github className="mr-2 h-4 w-4" />
                       Code
                     </Button>
-                    
-                    <Button size="sm" className="btn-modern bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-8 font-semibold">Live Demo</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -576,12 +586,12 @@ const Portfolio = () => {
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input 
-                      name="from_name"
+                      name="name"
                       placeholder="Your Name" 
                       required 
                     />
                     <Input 
-                      name="from_email"
+                      name="email"
                       placeholder="Your Email" 
                       type="email" 
                       required 
@@ -616,7 +626,7 @@ const Portfolio = () => {
       <footer className="py-8 border-t border-border">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2025 Ayush Choudhary. All rights reserved. Built with React & Tailwind CSS.
+            © 2025 Ayush Choudhary. All rights reserved.
           </p>
         </div>
       </footer>
