@@ -115,7 +115,6 @@ const Portfolio = () => {
   const skills = [
     { name: "React", level: 90 },
     { name: "Node.js", level: 85 },
-    { name: "TypeScript", level: 80 },
     { name: "JavaScript", level: 95 },
     { name: "Tailwind CSS", level: 90 },
     { name: "Express.js", level: 85 },
@@ -462,7 +461,7 @@ const Portfolio = () => {
           <div className="mt-16 text-center">
             <h3 className="text-2xl font-semibold mb-8">Technologies</h3>
             <div className="flex flex-wrap justify-center gap-4">
-              {["React", "Node.js", "TypeScript", "JavaScript", "Tailwind CSS", "Express.js", "MySQL", "Git", "Figma", "C#", ".NET"].map((tech) => (
+              {["React", "JavaScript", "Tailwind CSS", "Node.js", "Express.js", "MySQL", "Git", "Figma", "C#", ".NET"].map((tech) => (
                 <span
                   key={tech}
                   className="px-4 py-2 bg-card border border-primary/20 rounded-lg text-sm font-medium hover:border-primary/40 transition-colors"
